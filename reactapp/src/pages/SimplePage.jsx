@@ -1,9 +1,22 @@
 /* SimplePage.jsx */
 import React from "react";
 export default class SimplePage extends React.Component {
+    state = {
+        email: ""
+    }
+
+    setEmail = function(email) {
+        this.setState({email})
+        console.log(email)
+    }
+
     handleFormSubmit = e => {
         e.preventDefault()
 
+        console.log(e)
+    }
+
+    handleEmailBlur = e => {
         console.log(e)
     }
 
@@ -13,11 +26,11 @@ export default class SimplePage extends React.Component {
             <h2>Simple Email Form</h2>
                 <form onSubmit={this.handleFormSubmit}>
                     <label htmlFor="simpleEmail">Email address:</label>
-                    <input type="email" id="simpleEmail" name="simpleEmail" placeholder="name@example.com" required autoComplete="on" />
+                    <input type="email" id="simpleEmail" name="simpleEmail" placeholder="name@example.com" required autoComplete="on" onChange={e => this.setEmail(e.target?.value)} onBlur={this.handleEmailBlur} />
                     <button type="submit">Submit</button>
                     <input type="reset" value={"Reset"} />
                 </form>
             </div>
         )
-    }
+    }    
 }
