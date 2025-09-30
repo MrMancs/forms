@@ -3,9 +3,20 @@ import InputField from "../components/InputField/InputField";
 export default class AdvancedPage extends React.Component {
     state = {
         advText: "",
+        advEmail: "",
+        advTel: "", 
     }
 
     handleAdvTextValueChange = advText => this.setState({advText})
+    handleAdvEmailValueChange = advEmail => this.setState({advEmail})
+    handleAdvTelValueChange = advTel => {
+        console.log("handleAdvTelValueChange advTel: '"+advTel+"'")
+        let result = "error in tel: " + advTel
+        if (advTel.length >= 1)
+            result = advTel
+        this.setState({advTel})
+    }
+
 
     render() {
         return (
@@ -22,7 +33,7 @@ export default class AdvancedPage extends React.Component {
                     />
                     <div className="form-row">
                         <label htmlFor="adv-text">Text:</label>
-                        <input type="text" id="adv-text" name="adv-text" placeholder="Text input sample" />
+                        <input type="text" placeholder="Text input sample" />
                     </div>
                     <div className="form-row">
                         <label>Checkbox:</label>
@@ -64,12 +75,22 @@ export default class AdvancedPage extends React.Component {
                         <input type="datetime-local" id="adv-datetime" name="adv-datetime" />
                     </div>
                     <div className="form-row">
-                        <label htmlFor="adv-email">Email:</label>
-                        <input type="email" id="adv-email" name="adv-email" placeholder="example@mail.com" />
+                            <InputField
+                            type="email"
+                            name="adv-email"
+                            label="Email:"
+                            placeholder="example@mail.com"
+                            onValueChange={this.handleAdvEmailValueChange}
+                        />
                     </div>
                     <div className="form-row">
-                        <label htmlFor="adv-tel">Telephone:</label>
-                        <input type="tel" id="adv-tel" name="adv-tel" placeholder="+36 20 123 4567" />
+                            <InputField
+                            type="tel"
+                            name="adv-tel"
+                            label="Telephone:"
+                            placeholder="+36 20 123 4567"
+                            onValueChange={this.handleAdvTelValueChange}
+                        />
                     </div>
                     <div className="form-row">
                         <label htmlFor="adv-hidden">Hidden value:</label>
@@ -108,7 +129,7 @@ export default class AdvancedPage extends React.Component {
     }
 
     componentDidUpdate(prevState, prevProps) {
-        console.log("AdvancedPage state prev next", prevState, this.state)
-        console.log("AdvancedPage props prev next", prevProps, this.props)
+        //console.log("AdvancedPage state prev next", prevState, this.state)
+        //console.log("AdvancedPage props prev next", prevProps, this.props)
     }
 }
