@@ -1,10 +1,13 @@
 import React from "react";
 import InputField from "../components/InputField/InputField";
+import Checkbox from "../components/Checkbox/Checkbox";
 export default class AdvancedPage extends React.Component {
     state = {
         advText: "",
         advEmail: "",
-        advTel: "", 
+        advTel: "",
+
+        "adv-checkbox1": false,
     }
 
     handleAdvTextValueChange = advText => this.setState({advText})
@@ -15,6 +18,13 @@ export default class AdvancedPage extends React.Component {
         if (advTel.length >= 1)
             result = advTel
         this.setState({advTel})
+    }
+
+    handleCheckToggle = toggledCheckbox => {
+        console.log("handleCheckToggle toggledCheckbox", toggledCheckbox)
+        const newState = {...this.state}
+        newState[toggledCheckbox] = !this.state["adv-checkbox1"]
+        this.setState(newState)
     }
 
 
@@ -38,8 +48,17 @@ export default class AdvancedPage extends React.Component {
                     <div className="form-row">
                         <label>Checkbox:</label>
                         <div className="checkbox-group">
-                            <input type="checkbox" id="adv-checkbox1" name="adv-checkbox1" /><label htmlFor="adv-checkbox1">Item 1</label>
-                            <input type="checkbox" id="adv-checkbox2" name="adv-checkbox2" /><label htmlFor="adv-checkbox2">Item 2</label>
+                            <Checkbox 
+                                name="adv-checkbox1"
+                                label="Item 1"
+                                onCheckToggle={toggledCheckbox => this.handleCheckToggle(toggledCheckbox)}
+                            />
+                            <Checkbox 
+                                name="adv-checkbox2"
+                                label="Item 2"
+                                onCheckToggle={toggledCheckbox => this.handleCheckToggle(toggledCheckbox)}
+                            />
+                            
                         </div>
                     </div>
                     <div className="form-row">
